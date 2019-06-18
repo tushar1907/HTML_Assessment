@@ -1,4 +1,5 @@
 
+# Deployment for ACTIVEMQ
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -19,7 +20,7 @@ spec:
 
 ---
 
-
+# Deployment for POSITION-SIMULATOR
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -43,6 +44,7 @@ spec:
 
 ---
 
+# Deployment for POSITION-TRACKER
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -64,3 +66,26 @@ spec:
         - name: SPRING_PROFILES_ACTIVE
           value: production-microservice
 
+---
+
+# Deployment for API-GATEWAY
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-gateway
+spec:
+  selector:
+    matchLabels:
+      app: api-gateway
+  replicas: 1
+  template: # template for the pods
+    metadata:
+      labels:
+        app: api-gateway
+    spec:
+      containers:
+      - name: api-gateway
+        image: richardchesterwood/k8s-fleetman-api-gateway:release1
+        env:
+        - name: SPRING_PROFILES_ACTIVE
+          value: production-microservice

@@ -1,3 +1,4 @@
+# Service for WEBAPP
 apiVersion: v1
 kind: Service
 metadata:
@@ -18,7 +19,7 @@ spec:
   type: NodePort
 
 ---
-
+# Service for ACTIVEMQ
 apiVersion: v1
 kind: Service
 metadata:
@@ -43,6 +44,7 @@ spec:
 
 ---
 
+# Service for POSITION-TRACKER
 apiVersion: v1
 kind: Service
 metadata:
@@ -54,6 +56,26 @@ spec:
   # or maybe external users to connect to (eg browser)
   selector:
     app: position-tracker
+
+  ports:
+    - name: http
+      port: 8080
+
+  type: ClusterIP
+
+---
+
+# Service for API-GATEWAY
+apiVersion: v1
+kind: Service
+metadata:
+  name: fleetman-api-gateway
+spec:
+  # This defines which pods are going to be represented by this Service
+  # The service becomes a network endpoint for either other services
+  # or maybe external users to connect to (eg browser)
+  selector:
+    app: api-gateway
 
   ports:
     - name: http
