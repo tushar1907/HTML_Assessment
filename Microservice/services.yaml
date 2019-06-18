@@ -1,45 +1,42 @@
-kind: Service
 apiVersion: v1
+kind: Service
 metadata:
-  # Unique key of the Service instance
-  name: tushar-service
+  name: fleetman-webapp
+
 spec:
+  # This defines which pods are going to be represented by this Service
+  # The service becomes a network endpoint for either other services
+  # or maybe external users to connect to (eg browser)
+  selector:
+    app: webapp
+
   ports:
-    # Accept traffic sent to port 80
     - name: http
       port: 80
       nodePort: 30080
-  selector:
-    # Loadbalance traffic across Pods matching
-    # this label selector
-    app: webapp
-  # Create an HA proxy in the cloud provider
-  # with an External IP address - *Only supported
-  # by some cloud providers*
+
   type: NodePort
 
 ---
 
-kind: Service
 apiVersion: v1
+kind: Service
 metadata:
-  # Unique key of the Service instance
-  name: tushar-queue
+  name: fleetman-queue
+
 spec:
+  # This defines which pods are going to be represented by this Service
+  # The service becomes a network endpoint for either other services
+  # or maybe external users to connect to (eg browser)
+  selector:
+    app: queue
+
   ports:
-    # Accept traffic sent to port 80
     - name: http
       port: 8161
       nodePort: 30010
 
     - name: endpoint
       port: 61616
-      
-  selector:
-    # Loadbalance traffic across Pods matching
-    # this label selector
-    app: queue
-  # Create an HA proxy in the cloud provider
-  # with an External IP address - *Only supported
-  # by some cloud providers*
+
   type: NodePort
