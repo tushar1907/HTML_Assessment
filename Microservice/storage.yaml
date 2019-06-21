@@ -1,6 +1,4 @@
-# LocalStorage-mongopvc
-
-# What do we want
+# What do want?
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -12,9 +10,8 @@ spec:
   resources:
     requests:
       storage: 20Gi
-
 ---
-# How to we want to implement it
+# How do we want it implemented
 apiVersion: v1
 kind: PersistentVolume
 metadata:
@@ -24,7 +21,7 @@ spec:
   capacity:
     storage: 20Gi
   accessModes:
-      - ReadWriteOnce
+    - ReadWriteOnce
   hostPath:
-    path: "/mnt/somenew/directory/structure/"
-
+    path: "/mnt/some new/directory/structure/"
+    type: DirectoryOrCreate
