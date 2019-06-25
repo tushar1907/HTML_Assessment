@@ -1,0 +1,8 @@
+aws s3api create-bucket \
+    --bucket tushar-state-store \
+    --region us-east-1
+
+create bucket
+
+bucket name:
+export KOPS_STATE_STORE=s3://tushar-state-store
