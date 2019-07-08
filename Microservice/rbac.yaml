@@ -7,3 +7,19 @@ rules:
 - apiGroups: ["","apps"] # "" indicates the core API group and apps
   resources: ["*"] #pods, sercvices and deployments too.
   verbs: ["get", "watch", "list"]
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  namespace: default
+  name: pod-reader-user
+subjects:
+  #List users goinf into this role
+- kind: User
+  name: francis-linux
+roleRef:
+  kind: Role
+  name: pod-reader
+  apiGroup: rbac.authorization.k8s.io
